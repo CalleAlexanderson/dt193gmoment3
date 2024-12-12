@@ -1,3 +1,35 @@
+<script>
+import { RouterLink } from 'vue-router';
+import Hbutton from './HeaderButton.vue';
+import HrouteLink from './HeaderRouteLink.vue';
+
+export default {
+    name: "Header",
+    components: {
+        Hbutton, HrouteLink
+    },
+    data() {
+        return {
+            menuOpen: false
+        }
+    },
+    methods: {
+        mobileMenu() {
+            console.log("works");
+            console.log(this.menuOpen);
+            if (this.menuOpen == true) {
+                document.getElementById('mobile_menu').style.visibility = "hidden";
+                this.menuOpen = false;
+            } else {
+                document.getElementById('mobile_menu').style.visibility = "visible";
+                this.menuOpen = true;
+            }
+        }
+    }
+}
+
+</script>
+
 <template>
     <header>
         <div>
@@ -16,21 +48,19 @@
                 </li>
             </ul>
         </nav>
-        <button type="button" aria-label="Öpnna navigeringsmeny" id="mobile_btn"><img
-                src="../assets/pictures/bars-solid.svg" alt="Navigeringsmeny"></button>
+        <Hbutton @mobileMenu="mobileMenu" descAria="Öpnna navigeringsmeny" btnId="mobile_btn" location="/src/assets/pictures/bars-solid.svg" />
         <div id="mobile_menu">
             <nav id="mobile_nav">
-                <button type="button" aria-label="Stäng navigeringsmeny" id="mobile_btn_close"><img
-                        src="../assets/pictures/xmark-solid.svg" alt="Navigeringsmeny"></button>
+                <Hbutton @mobileMenu="mobileMenu" descAria="Stäng navigeringsmeny" btnId="mobile_btn_close" location="/src/assets/pictures/xmark-solid.svg" />
                 <ul>
                     <li>
-                        <RouterLink to="/" class="mobileRoute">Start</RouterLink>
+                        <HrouteLink @mobileMenu="mobileMenu" toLocation="/" text="Start" />
                     </li>
                     <li>
-                        <RouterLink to="/böcker" class="mobileRoute">Böcker</RouterLink>
+                        <HrouteLink @mobileMenu="mobileMenu" toLocation="/böcker" text="Böcker" />
                     </li>
                     <li>
-                        <RouterLink to="/info" class="mobileRoute">Vue</RouterLink>
+                        <HrouteLink @mobileMenu="mobileMenu" toLocation="/info" text="Vue" />
                     </li>
                 </ul>
             </nav>
@@ -38,48 +68,6 @@
     </header>
 </template>
 
-
-
-
-
-<script>
-import { RouterLink } from 'vue-router';
-export default {
-    name: "Header"
-}
-
-// använde min template header och modifierade den så den funkar med SPA
-let menuOpen = false;
-let menuDiv;
-let mobileRouters;
-// --------------------------------------------------
-// Initiera globala variabler och händelsehanterare
-function init() {
-    menuDiv = document.getElementById('mobile_menu');
-    menuDiv.style.visibility = "hidden";
-    mobileRouters = document.getElementsByClassName("mobileRoute");
-    document.getElementById('mobile_btn').addEventListener('click', menu);
-    document.getElementById('mobile_btn_close').addEventListener('click', menu);
-
-    for (let index = 0; index < mobileRouters.length; index++) {
-        mobileRouters[index].addEventListener('click', menu);
-    }
-    
-} // Slut init
-window.addEventListener('load', init);
-// --------------------------------------------------
-
-function menu() {
-    if (menuOpen == true) {
-        menuDiv.style.visibility = "hidden";
-        menuOpen = false;
-    } else {
-        menuDiv.style.visibility = "visible";
-        menuOpen = true;
-    }
-}
-
-</script>
 
 <style scoped>
 header {
@@ -112,21 +100,6 @@ a:hover {
 #pc_nav {
     visibility: hidden;
     position: absolute;
-}
-
-button {
-    width: 60px;
-    height: 60px;
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    border-radius: 10px;
-    border: 1px solid black;
-    background-color: white;
-}
-
-button img {
-    height: 100%;
 }
 
 #mobile_menu {
@@ -172,9 +145,9 @@ button img {
 
     #pc_nav {
         visibility: visible;
-        right: 10px;
+        right: 20px;
         top: 50%;
-        transform: translate(0,-50%);
+        transform: translate(0, -50%);
     }
 
     #mobile_btn {
