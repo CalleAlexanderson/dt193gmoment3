@@ -9,7 +9,6 @@
         <p class="isbn">{{ book.isbn }}</p>
         <p class="finished" v-if="book.finished">Slutläst</p>
         <p class="finished" v-else>Påbörjad</p>
-        <a class="bookLink" v-bind:href="'https://www.bokus.com/bok/' + book.isbn">Köp {{ book.title }}</a>
     </article>
 </template>
 
