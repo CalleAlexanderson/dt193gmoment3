@@ -1,5 +1,7 @@
 <template>
   <h1>Böcker</h1>
+  <!-- @addBook="addBook()"  -->
+  <BookForm  @bookAdded="fetchBooks()"/>
   <section id="book_section">
     <Book @deleteBook="deleteBook(book.isbn)" v-for="book in books" :book="book" :key="book.isbn" />
   </section>
@@ -37,17 +39,35 @@ export default {
         });
     },
     async addBook() {
+      console.log(this.formTitle);
+      console.log(this.formAuthor);
+      console.log(this.formIsbn);
+      let warningField = document.getElementById('formWarningField')
+      if (this.formTitle == "" || this.formAuthor == "" || this.formIsbn == "") {
+        console.log("något fel");
+        warningField.innerHTML = "Fyll i alla fält markerade med *";
+        return;
+      } else {
+        warningField.innerHTML = "&nbsp;";
+      }
+      console.log("efter validering");
+
+      if (document.getElementById('finished').checked) {
+        this.finished = true;
+      } else {
+        this.finished = false;
+      }
       // fick inte axios att fungera, testade i ett flertal timmar
       const url = "http://127.0.0.1:3000/books";
       try {
         const response = await fetch(url, {
           method: "POST",
           body: JSON.stringify({
-            title: "calles bok",
-            author: "calle",
-            isbn: 123,
-            series: "mina böcker",
-            finished: true
+            title: this.formTitle,
+            author: this.formAuthor,
+            isbn: this.formIsbn,
+            series: this.formSeries,
+            finished: this.finished
           }),
         });
         if (!response.ok) {
@@ -55,14 +75,20 @@ export default {
         }
 
         const json = await response.json();
+        console.log(json.message);
+        if (json.message == "book already exist in database") {
+          warningField.innerHTML = "Bok redan tillagd";
+        } else {
+          warningField.innerHTML = "&nbsp;";
+        }
         console.log(json);
       } catch (error) {
         console.error(error.message);
       }
-      await this.fetchBooks();
+      this.fetchBooks();
     },
 
-    async deleteBook(isbnID){
+    async deleteBook(isbnID) {
       const url = "http://127.0.0.1:3000/books";
 
       try {
@@ -72,7 +98,7 @@ export default {
             isbn: isbnID,
           }),
         });
-        
+
         if (!response.ok) {
           throw new Error(`Response status: ${response.status}`);
         }
@@ -81,7 +107,7 @@ export default {
       } catch (error) {
         console.error(error.message);
       }
-      await this.fetchBooks();
+      this.fetchBooks();
     }
   },
   mounted() {
