@@ -217,10 +217,10 @@ export default {
 
 @media only screen and (min-width: 400px) {
 
-#book_section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
+  #book_section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media only screen and (min-width: 600px) {
@@ -232,10 +232,10 @@ export default {
 
 @media only screen and (min-width: 850px) {
 
-#book_section {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
+  #book_section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
