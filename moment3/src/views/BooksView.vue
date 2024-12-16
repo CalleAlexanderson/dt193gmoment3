@@ -67,51 +67,6 @@ export default {
           // always executed
         });
     },
-    async addBook() {
-      let warningField = document.getElementById('formWarningField')
-      if (this.formTitle == "" || this.formAuthor == "" || this.formIsbn == "") {
-        warningField.innerHTML = "Fyll i alla fält markerade med *";
-        return;
-      } else {
-        warningField.innerHTML = "&nbsp;";
-      }
-
-      if (document.getElementById('finished').checked) {
-        this.finished = true;
-      } else {
-        this.finished = false;
-      }
-      // skickar anrop till server
-      const url = "http://127.0.0.1:3000/books";
-      try {
-        const response = await fetch(url, {
-          method: "POST",
-          body: JSON.stringify({
-            title: this.formTitle,
-            author: this.formAuthor,
-            isbn: this.formIsbn,
-            series: this.formSeries,
-            finished: this.finished
-          }),
-        });
-        if (!response.ok) {
-          throw new Error(`Response status: ${response.status}`);
-        }
-
-        const json = await response.json();
-        console.log(json.message);
-        // tar hand om svar
-        if (json.message == "book already exist in database") {
-          warningField.innerHTML = "Bok redan tillagd";
-        } else {
-          warningField.innerHTML = "&nbsp;";
-        }
-        console.log(json);
-      } catch (error) {
-        console.error(error.message);
-      }
-      this.fetchBooks();
-    },
     async confirmDelete(isbnID, title) {
       // skapar en ruta så användaren inte råkar ta bort en bok av misstag
       let div = document.getElementById('delete_confirm');
@@ -176,7 +131,6 @@ export default {
   },
   mounted() {
     this.fetchBooks();
-    // this.addBook();
   }
 }
 </script>

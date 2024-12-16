@@ -100,7 +100,9 @@ export default {
                 console.log(json.message);
                 if (json.message == "book already exist in database") {
                     warningField.innerHTML = "Bok redan lagrad";
+                    warningField.style.backgroundColor = "darkred"
                 } else {
+                warningField.style.backgroundColor = "white"
                     warningField.innerHTML = "&nbsp;";
                 }
                 console.log(json);

@@ -4,7 +4,7 @@
             {{ book.title }}
         </h2>
         <p class="author">Av {{ book.author }}</p>
-        <p class="series" v-if="book.series != null">Ingår i serien "{{ book.series }}"</p>
+        <p class="series" v-if="book.series != null && book.series != ''">Ingår i serien "{{ book.series }}"</p>
         <p class="series" v-else>Ensamstående bok</p>
         <p class="isbn">ISBN: {{ book.isbn }}</p>
         <p class="finished" v-if="book.finished">Slutläst</p>
