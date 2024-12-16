@@ -1,29 +1,9 @@
-# moment3
+# Webbsida om mitt fritidsintress att läsa böcker
 
-This template should help get you started developing with Vue 3 in Vite.
+Webbsidan hämtar data från ett api som jag skapat här: https://github.com/Webbutvecklings-programmet/moment-2-backend-ramverk-CalleAlexanderson
 
-## Recommended IDE Setup
+För att köra igång programmet kör vi först 'cd moment3' för att gå in i korrekt mapp och sedan kör 'npm run dev' för att start appen.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Undersidor
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+Webbsidan består av tre sidor: Startsida där jag skrivit om mitt intresse i läsning, Böcker sida där böcker från API skrivs ut, böckerna kan tas bort genom att trycka på de och nya böcker kan läggas till med formuläret på sidan och den sista sidan är en sida där jag berättar om min upplevelse med Vue.
