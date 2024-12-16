@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  position: fixed;
+  top: 80px;
+  height: 40px;
+  background-color: #1e4b4b;
+  text-align: center;
+  color: white;
+  width: 100%;
+}
+
+main {
+  margin: 120px 0 80px;
+}
+
