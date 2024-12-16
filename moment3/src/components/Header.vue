@@ -15,8 +15,6 @@ export default {
     },
     methods: {
         mobileMenu() {
-            console.log("works");
-            console.log(this.menuOpen);
             if (this.menuOpen == true) {
                 document.getElementById('mobile_menu').style.visibility = "hidden";
                 this.menuOpen = false;
@@ -70,13 +68,15 @@ export default {
 
 
 <style scoped>
+/* sticky ville inte fungera */
 header {
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgb(50, 120, 120);
     height: 80px;
+    background-color: #327878;
+    z-index: +1;
 }
 
 ul {

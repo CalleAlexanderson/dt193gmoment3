@@ -28,7 +28,7 @@
         left: 0;
         bottom: 0;
         width: 100%;
-        background-color: rgb(30, 75, 75);
+        background-color: #1e4b4b;
         height: 70px;
     }
 
